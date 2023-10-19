@@ -2,7 +2,18 @@ import { useReducer } from 'react'
 import { initialState as initialTranslatorState, reducer as translatorReducer } from '../reducers/translator'
 import { type Language, type FromLanguage, TranslatorAction } from '../models/types.d'
 
-export const useStore = () => {
+export const useStore = (): {
+  fromLanguage: FromLanguage
+  toLanguage: Language
+  fromText: string
+  result: string
+  loading: boolean
+  interchangeLanguagues: () => void
+  setFromLanguage: (payload: FromLanguage) => void
+  setToLanguage: (payload: Language) => void
+  setFromText: (payload: string) => void
+  setResult: (payload: string) => void
+} => {
   const [{
     fromLanguage,
     toLanguage,

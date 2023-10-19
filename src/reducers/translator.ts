@@ -16,24 +16,34 @@ export const reducer = (state: ITranslatorState, action: TranslatorActions) => {
       if (state.fromLanguage === AUTO_LANGUAGUE) return state
       return {
         ...state,
+        loading: state.fromText !== '',
+        result: '',
         fromLanguage: state.toLanguage,
         toLanguage: state.fromLanguage
       }
     }
     case TranslatorAction.SET_FROM_LANGUAGE:
+      if (state.fromLanguage === action.payload) return state
+
       return {
         ...state,
-        fromLanguage: action.payload
+        fromLanguage: action.payload,
+        result: '',
+        loading: state.fromText !== ''
       }
     case TranslatorAction.SET_TO_LANGUAGE:
+      if (state.toLanguage === action.payload) return state
+
       return {
         ...state,
-        toLanguage: action.payload
+        toLanguage: action.payload,
+        result: '',
+        loading: state.fromText !== ''
       }
     case TranslatorAction.SET_FROM_TEXT:
       return {
         ...state,
-        loading: true,
+        loading: action.payload !== '',
         fromText: action.payload,
         result: ''
       }
